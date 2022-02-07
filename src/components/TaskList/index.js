@@ -5,8 +5,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import {getRealm} from '../../services/realm';
 
 export default function TaskList({data}) {
-  // const [title, setTitle] = useState('caminhão');
-  // const [description, setDescription] = useState('comprar roda');
   const [open, setOpen] = useState(false);
 
   function handleVisible() {
@@ -21,7 +19,6 @@ export default function TaskList({data}) {
     const id = data._id;
     realm.write(() => {
       realm.delete(realm.objectForPrimaryKey('Task', id));
-      // realm.delete(realm.objects('Task').sorted('_id', true));
     });
   }
 
@@ -35,7 +32,6 @@ export default function TaskList({data}) {
     });
   }
 
-  // console.log(data.description);
   return (
     <>
       {open === false ? (
@@ -47,7 +43,6 @@ export default function TaskList({data}) {
             flexWrap: 'wrap',
             justifyContent: 'space-between',
             marginBottom: 20,
-            // height: 200,
           }}>
           <Text
             style={[
@@ -143,9 +138,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 400,
-
     marginTop: 20,
-
     borderWidth: 2,
     borderColor: '#646D7E',
     borderRadius: 15,
@@ -155,7 +148,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     fontFamily: 'Poppins-SemiBold',
-    // fontWeight: 'r',
     color: '#000',
     marginLeft: 10,
     marginRight: 10,

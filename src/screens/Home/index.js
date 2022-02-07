@@ -31,9 +31,7 @@ const Home = () => {
       <Text style={styles.title}> Tarefas </Text>
       <FlatList
         style={styles.flat}
-        // contentContainerStyle={{padding: 10}}
         showsVerticalScrollIndicator={false}
-        // keyboardShouldPersistTaps="handled"
         data={taskList}
         keyExtractor={item => item._id}
         renderItem={({item}) => <TaskList data={item} />}
@@ -55,8 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fbfbfb',
     alignItems: 'center',
-
-    // justifyContent: 'center',
   },
   title: {
     fontFamily: 'Poppins-SemiBold',
@@ -71,7 +67,6 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 10,
     alignItems: 'center',
-    // marginBottom: 20,
   },
   text: {
     color: '#fff',
@@ -79,14 +74,9 @@ const styles = StyleSheet.create({
   flat: {
     width: '90%',
     marginTop: 17,
-    //   height: 40,
-    // backgroundColor: 'red',
-    //   marginBottom: 10,
   },
   footer: {
     width: '100%',
-    // backgroundColor: '#F4F5F6',
-
     padding: 24,
   },
 });

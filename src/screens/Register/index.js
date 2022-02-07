@@ -76,12 +76,6 @@ export default function Register() {
             placeholder="  Título"
             placeholderTextColor={'#919293'}
             error={errors.title && errors.title.message}
-            // style={{
-            //   borderWidth: 2,
-            //   borderColor: '#919293',
-            //   marginBottom: 10,
-            //   borderRadius: 15,
-            // }}
           />
           <InputForm
             name="description"
@@ -93,7 +87,6 @@ export default function Register() {
             error={errors.description && errors.description.message}
             style={{
               textAlignVertical: 'top',
-              // backgroundColor: '#fff',
               borderWidth: 2,
               borderColor: '#919293',
               borderRadius: 15,
@@ -146,7 +139,6 @@ const styles = StyleSheet.create({
     color: '#000',
     backgroundColor: '#f0f2f5',
     marginBottom: 10,
-
     padding: 18,
     borderRadius: 10,
   },
@@ -163,15 +155,11 @@ const styles = StyleSheet.create({
   },
   flat: {
     width: '90%',
-    //   height: 40,
-    // backgroundColor: 'red',
-    //   marginBottom: 10,
   },
   footer: {
     width: '100%',
     justifyContent: 'flex-end',
     padding: 18,
-    // marginTop: 100,
     backgroundColor: '#fbfbfb',
   },
 });
