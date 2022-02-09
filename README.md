@@ -12,13 +12,15 @@
 <br />
 
 <div align="center">
-<img  src=".github/task.gif" alt="gif do app" >
+<img  width=100% height=100% src=".github/task.gif" alt="gif do app" >
 </div>
 <br /><br />
 
 # Índice
 
 - [Sobre](#sobre)
+- [Telas](#telas)
+
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Como Usar](#como-usar)
   <br>
@@ -37,6 +39,21 @@ Aonde você pode salvar, editar e deletar suas tarefas <br>
 
 <br>
 
+<a id="telas"></a>
+
+<h2 align="center"> Tela principal.</h2>
+<br /><br />
+
+<img src=".github/tela-principal.png" alt="tela Principal" align="center"/>
+<br /><br />
+<br /><br />
+<h2 align="center"> Tela para registrar as tarefas</h2>
+<br /><br /><br /><br />
+<img src=".github/tela-registrar.png" alt="Tela do entrada">
+
+<br /><br />
+
+<br>
 <a id="tecnologias-utilizadas"></a>
 <br>
 
