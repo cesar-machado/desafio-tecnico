@@ -9,10 +9,12 @@ import * as ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 import {tasksStore} from '../../store/TaskStore';
 
-export default function Register() {
-  const [image, setImage] = useState();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+export default function EditTask({route}) {
+  const _id = route.params;
+  const item = tasksStore.tasks.find(task => task._id === _id);
+  const [image, setImage] = useState(item.image);
+  const [title, setTitle] = useState(item.title);
+  const [description, setDescription] = useState(item.description);
 
   function imagePickerCallback(data) {
     if (data.didCancel) {
@@ -41,13 +43,15 @@ export default function Register() {
         <ScrollView style={styles.fields}>
           <TextInput
             name="title"
-            placeholder="  Título da Tarefa"
+            placeholder="  Título"
             onChangeText={setTitle}
             style={styles.input}
+            value={title}
           />
           <TextInput
             name="description"
-            placeholder="  Descrição da tarefa"
+            placeholder="  Descrição"
+            value={description}
             multiline={true}
             numberOfLines={10}
             placeholderTextColor={'#919293'}
@@ -84,7 +88,8 @@ export default function Register() {
         <RectButton
           style={[styles.button, {borderWidth: 2, borderColor: '#000'}]}
           onPress={() => {
-            tasksStore.addTask({
+            tasksStore.EditTask({
+              _id,
               title,
               description,
               image,

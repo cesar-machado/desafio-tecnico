@@ -2,34 +2,19 @@
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import {getRealm} from '../../services/realm';
+import {tasksStore} from '../../store/TaskStore';
+import {observer} from 'mobx-react';
+import {useNavigation} from '@react-navigation/native';
 
-export default function TaskList({data}) {
+const TaskList = observer(({data}) => {
   const [open, setOpen] = useState(false);
+  const navigation = useNavigation();
 
   function handleVisible() {
     setOpen(true);
   }
   function handleInvisible() {
     setOpen(false);
-  }
-
-  async function deleteTask() {
-    const realm = await getRealm();
-    const id = data._id;
-    realm.write(() => {
-      realm.delete(realm.objectForPrimaryKey('Task', id));
-    });
-  }
-
-  async function editTask() {
-    const realm = await getRealm();
-    const _id = data._id;
-    realm.write(() => {
-      let myTask = realm.objectForPrimaryKey('Task', _id);
-      myTask.title = 'caminhão';
-      myTask.description = 'comprar roda';
-    });
   }
 
   return (
@@ -61,12 +46,17 @@ export default function TaskList({data}) {
               }}
               onPress={handleVisible}
             />
-            <Icon name="edit" size={24} color="#43ABFB" onPress={editTask} />
+            <Icon
+              name="edit"
+              size={24}
+              color="#43ABFB"
+              onPress={() => navigation.navigate('EditTask', data._id)}
+            />
             <Icon
               name="trash"
               size={24}
               color="red"
-              onPress={deleteTask}
+              onPress={() => tasksStore.deleteTask(data._id)}
               style={{
                 marginRight: 10,
                 marginLeft: 10,
@@ -100,12 +90,17 @@ export default function TaskList({data}) {
                 }}
                 onPress={handleInvisible}
               />
-              <Icon name="edit" size={24} color="#43ABFB" onPress={editTask} />
+              <Icon
+                name="edit"
+                size={24}
+                color="#43ABFB"
+                onPress={() => navigation.navigate('EditTask', data._id)}
+              />
               <Icon
                 name="trash"
                 size={24}
                 color="red"
-                onPress={deleteTask}
+                onPress={() => tasksStore.deleteTask(data._id)}
                 style={{
                   marginLeft: 10,
                 }}
@@ -113,12 +108,19 @@ export default function TaskList({data}) {
             </View>
           </View>
           <View>
-            <Text style={styles.title}>Título: {data.title} </Text>
-            <Text style={styles.title}>Descrição: {data.description}</Text>
-            <Text style={styles.title}> </Text>
+            <Text
+              style={[
+                styles.title,
+                {letterSpacing: 1, textTransform: 'capitalize', marginTop: 10},
+              ]}>
+              Título: {data.title}{' '}
+            </Text>
+            <Text style={[styles.title, {letterSpacing: 1}]}>
+              Descrição: {data.description}
+            </Text>
           </View>
 
-          <View style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', marginTop: 10}}>
             <Image
               style={styles.avatar}
               source={{
@@ -132,7 +134,7 @@ export default function TaskList({data}) {
       )}
     </>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -162,3 +164,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
+
+export default TaskList;

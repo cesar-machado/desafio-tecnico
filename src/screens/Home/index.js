@@ -1,38 +1,42 @@
+/* eslint-disable no-unused-vars */
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import TaskList from '../../components/TaskList';
-import {getRealm} from '../../services/realm';
 import {RectButton} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import {observer} from 'mobx-react';
+import {tasksStore} from '../../store/TaskStore';
+import {getRealm} from '../../services/realm';
 
-const Home = () => {
+const Home = observer(() => {
   const [taskList, setTaskList] = useState([]);
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    async function loadTaskList() {
-      const realm = await getRealm();
+  // useEffect(() => {
+  //   async function loadTaskList() {
+  //     const realm = await getRealm();
 
-      const data = realm.objects('Task').sorted('_id', true);
+  //     const data = realm.objects('Task').sorted('_id', true);
 
-      // console.log(data);
+  //     // console.log(tasksStore.tasks);
 
-      setTaskList(data);
-    }
+  //     setTaskList(data);
+  //   }
 
-    loadTaskList();
-  }, []);
+  //   loadTaskList();
+  // }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}> Tarefas </Text>
+
       <FlatList
         style={styles.flat}
         showsVerticalScrollIndicator={false}
-        data={taskList}
+        data={tasksStore.tasks}
         keyExtractor={item => item._id}
         renderItem={({item}) => <TaskList data={item} />}
       />
@@ -46,7 +50,7 @@ const Home = () => {
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
